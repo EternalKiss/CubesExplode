@@ -1,11 +1,12 @@
 using UnityEngine;
+using System;
 using UnityEngine.Events;
 
 public class MouseClickReader : MonoBehaviour
 {
     private const int _mouseButton = 0;
 
-    public event UnityAction Clicked;
+    public event Action Clicked;
 
     private void Update()
     {

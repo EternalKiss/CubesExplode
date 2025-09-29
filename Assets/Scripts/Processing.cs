@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Processing : MonoBehaviour
 {
-    [SerializeField] private MouseClickReader _mouseClickInput;
     [SerializeField] private RayCaster _rayCaster;
     [SerializeField] private Spawner _spawner;
     [SerializeField] private int _spawnChanceMax = 100;
@@ -37,7 +36,7 @@ public class Processing : MonoBehaviour
     private bool CanSpawn(Cube cube)
     {
         float spawnChance = cube.SpawnChance;
-        int spawnRoll = Random.Range(_spawnChanceMin, _spawnChanceMax);
+        int spawnRoll = Random.Range(_spawnChanceMin, _spawnChanceMax + 1);
 
         return spawnRoll <= spawnChance;
     }
