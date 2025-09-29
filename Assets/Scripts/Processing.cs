@@ -5,6 +5,7 @@ public class Processing : MonoBehaviour
 {
     [SerializeField] private RayCaster _rayCaster;
     [SerializeField] private Spawner _spawner;
+    [SerializeField] private Exploder _exploder;
     [SerializeField] private int _spawnChanceMax = 100;
     [SerializeField] private int _spawnChanceMin = 1;
     [SerializeField] private int _spawnCountMax = 6;
@@ -12,21 +13,22 @@ public class Processing : MonoBehaviour
 
     private void OnEnable()
     {
-        _rayCaster.Hited += CubeDestroy;
+        _rayCaster.Hited += DestroyCube;
     }
 
     private void OnDisable()
     {
-        _rayCaster.Hited -= CubeDestroy;
+        _rayCaster.Hited -= DestroyCube;
     }
 
-    private void CubeDestroy(Cube cube)
+    private void DestroyCube(Cube cube)
     {
         List<Cube> newCubes = new List<Cube>();
 
         if (CanSpawn(cube))
         {
             newCubes = _spawner.Create(CalculateSpawnCount(), cube);
+            _exploder.Explode(cube, newCubes);
             Debug.Log("Куб разделился!");
         }
 
