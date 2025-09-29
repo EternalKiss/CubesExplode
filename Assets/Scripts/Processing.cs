@@ -6,10 +6,10 @@ public class Processing : MonoBehaviour
     [SerializeField] private MouseClickReader _mouseClickInput;
     [SerializeField] private RayCaster _rayCaster;
     [SerializeField] private Spawner _spawner;
-    private int _spawnChanceMax = 100;
-    private int _spawnChanceMin = 1;
-    private int _spawnCountMax = 6;
-    private int _spawnCountMin = 2;
+    [SerializeField] private int _spawnChanceMax = 100;
+    [SerializeField] private int _spawnChanceMin = 1;
+    [SerializeField] private int _spawnCountMax = 6;
+    [SerializeField] private int _spawnCountMin = 2;
 
     private void OnEnable()
     {
@@ -18,14 +18,14 @@ public class Processing : MonoBehaviour
 
     private void OnDisable()
     {
-       _rayCaster.Hited -= CubeDestroy;
+        _rayCaster.Hited -= CubeDestroy;
     }
 
     private void CubeDestroy(Cube cube)
     {
         List<Cube> newCubes = new List<Cube>();
 
-        if(CanSpawn(cube))
+        if (CanSpawn(cube))
         {
             newCubes = _spawner.Create(CalculateSpawnCount(), cube);
             Debug.Log("Куб разделился!");
@@ -44,7 +44,7 @@ public class Processing : MonoBehaviour
 
     private int CalculateSpawnCount()
     {
-        int spawnCount = Random.Range(_spawnCountMin, _spawnCountMax++);
+        int spawnCount = Random.Range(_spawnCountMin, _spawnCountMax + 1);
         return spawnCount;
     }
 }
