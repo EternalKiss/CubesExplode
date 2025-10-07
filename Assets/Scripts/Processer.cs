@@ -28,8 +28,11 @@ public class Processer : MonoBehaviour
         if (CanSpawn(cube))
         {
             newCubes = _spawner.Create(CalculateSpawnCount(), cube);
-            _exploder.Explode(cube, newCubes);
             Debug.Log("Куб разделился!");
+        }
+        else
+        {
+            _exploder.Explode(cube);
         }
 
         _spawner.DestroyOldCube(cube);

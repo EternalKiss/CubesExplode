@@ -417,7 +417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RayCaster
   _mouseClickInput: {fileID: 1416580471}
-  _maxDistance: 1000
+  _maxDistance: 10000
 --- !u!114 &330585549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -908,8 +908,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1efefd0ba87dde741ac3d43e479dbc9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Exploder
-  _explosionForce: 100
-  _explosionRadius: 30
+  _explosionForce: 500
+  _explosionRadius: 50
 --- !u!1 &1522900359
 GameObject:
   m_ObjectHideFlags: 0
