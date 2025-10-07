@@ -28,8 +28,6 @@ public class Cube : MonoBehaviour
 
         transform.localScale = Vector3.one * size;
         transform.position = position;
-
-
     }
 
     private void ColorChanger()

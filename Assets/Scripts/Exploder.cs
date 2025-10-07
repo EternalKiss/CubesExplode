@@ -5,8 +5,29 @@ public class Exploder : MonoBehaviour
 {
     [SerializeField] private float _explosionForce = 10f;
     [SerializeField] private float _explosionRadius = 5f;
-    [SerializeField] ParticleSystem _effect;
 
+    public void Explode(Cube oldCube, List<Cube> newCubes)
+    {
+        foreach (Cube cube in newCubes)
+        {
+            if (cube.TryGetComponent(out Rigidbody rigidBody))
+            {
+                rigidBody.AddExplosionForce(_explosionForce, oldCube.transform.position, _explosionRadius);
+            }
+        }
+    }
+
+    public void Explode(Cube oldCube)
+    {
+        float explosionRadius = _explosionRadius / oldCube.Size;
+        float explosionForce = _explosionForce / oldCube.Size;
+
+        foreach (Rigidbody rigidbody in GetExplodableObjects())
+        {
+            rigidbody.AddExplosionForce(explosionForce, oldCube.transform.position, explosionRadius);
+        }
+
+    }
     private List<Rigidbody> GetExplodableObjects()
     {
         Collider[] hits = Physics.OverlapSphere(transform.position, _explosionRadius);
@@ -22,16 +43,5 @@ public class Exploder : MonoBehaviour
         }
 
         return cubes;
-    }
-
-    public void Explode(Cube oldCube)
-    {
-        float explosionForce = _explosionForce / oldCube.Size;
-        float explosionRadius = _explosionRadius / oldCube.Size;
-
-        foreach (Rigidbody explodableObject in GetExplodableObjects())
-        {
-            explodableObject.AddExplosionForce(explosionForce, oldCube.transform.position, explosionRadius);
-        }
     }
 }
